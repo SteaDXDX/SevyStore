@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sevy Store - Boutique de sneakers et chaussures premium en Côte d'Ivoire">
+    <meta name="keywords" content="sneakers, chaussures, Nike, Adidas, New Balance, mode, Abidjan, Côte d'Ivoire, boutique en ligne">
+    <meta name="theme-color" content="#8b1e2f">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sevy Store - Boutique de Sneakers Premium">
+    <meta property="og:description" content="Sneakers premium à Abidjan : Nike, Adidas, New Balance... Livraison rapide et commande via WhatsApp.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1200&q=80">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Sevy Store - Boutique de Sneakers Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%238b1e2f'/%3E%3Cpath d='M16 38c12 0 18-14 32-14 2 0 4 .2 6 .6-2 7.6-8.4 16.4-18.6 18.8C25 45.8 18.8 43 16 38Z' fill='white' opacity='.95'/%3E%3Cpath d='M18 40c10 2 18-10 30-12' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+        
+        :root {
+            --primary: #8b1e2f;
+            --primary-dark: #6f1826;
+            --primary-light: #a82d42;
+            --secondary: #8b1e2f;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #8b1e2f 0%, #6f1826 100%);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #6f1826 0%, #8b1e2f 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(139, 30, 47, 0.3);
+        }
+        
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 12px;
+        }
+        
+        * {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        
+        .logo-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .product-image-container {
+            overflow: hidden;
+        }
+
+        .product-image-container img {
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image-container img {
+            transform: scale(1.05);
+        }
+        
+        .modal {
+            animation: modalPop 0.3s ease forwards;
+        }
+        
+        @keyframes modalPop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .cart-count {
+            animation: pop 0.3s ease;
+        }
+
+        @keyframes pop {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(139, 30, 47, 0.95) 0%, rgba(139, 30, 47, 0.7) 50%, transparent 100%);
+        }
+
+        .category-btn {
+            transition: all 0.3s ease;
+        }
+
+        .category-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        .newsletter-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(139, 30, 47, 0.3);
+        }
+
+        .btn-outline {
+            border: 2px solid white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .feature-icon {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+            color: var(--primary);
+        }
+
+        .toast {
+            animation: slideInUp 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translateY(20px); }
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+        }
+
+        .size-btn {
+            transition: all 0.2s ease;
+        }
+
+        .size-btn:hover, .size-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .color-swatch {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .color-swatch:hover, .color-swatch.active {
+            border-color: var(--primary);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Overlay pour menu mobile -->
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/50 z-40 hidden" onclick="closeMobileMenu()"></div>
+
+    <!-- HEADER STYLE JUMIA -->
+    <header class="bg-[#8b1e2f] text-white sticky top-0 z-50 shadow-lg">
+        <!-- Top bar avec logo, recherche et actions -->
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex items-center gap-4">
+                <!-- Logo -->
+                <div class="flex items-center gap-2 cursor-pointer flex-shrink-0" onclick="navigateToSection('home')">
+                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-[#8b1e2f] text-xl font-bold shadow-md">
+                        <i class="fas fa-shoe-prints"></i>
+                    </div>
+                    <div class="hidden sm:block">
+                        <h1 class="logo-font text-2xl font-bold leading-none">SEVY</h1>
+                        <span class="text-xs opacity-90">SNEAKERS</span>
+                    </div>
+                </div>
+
+                <!-- Barre de recherche style Jumia (centrale et grande) -->
+                <div class="flex-1 max-w-2xl mx-4">
+                    <div class="relative flex items-center">
+                        <input 
+                            id="search-input"
+                            type="text" 
+                            placeholder="Rechercher des sneakers, marques..." 
+                            onkeyup="if(event.key==='Enter') filterProducts()"
+                            class="w-full bg-white text-gray-800 rounded-md py-2.5 px-4 pl-10 pr-20 text-sm focus:outline-none focus:ring-2 focus:ring-white/50 shadow-md">
+                        <i class="fas fa-search absolute left-3 text-gray-400"></i>
+                        <button onclick="filterProducts()" class="absolute right-1 top-1 bottom-1 bg-[#8b1e2f] hover:bg-[#e07b00] text-white px-4 rounded-md text-sm font-medium transition-colors">
+                            RECHERCHER
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Actions à droite -->
+                <div class="flex items-center gap-3 flex-shrink-0">
+                    <button type="button" onclick="showFavorites()" class="hidden sm:flex flex-col items-center gap-0.5 hover:bg-white/10 p-2 rounded-md transition-colors" aria-label="Voir mes favoris">
+                        <i class="fas fa-heart text-lg"></i>
+                        <span class="text-xs">Favoris</span>
+                    </button>
+                    <button type="button" onclick="showCart()" class="flex flex-col items-center gap-0.5 hover:bg-white/10 p-2 rounded-md transition-colors relative" aria-label="Voir mon panier">
+                        <div class="relative">
+                            <i class="fas fa-shopping-cart text-lg"></i>
+                            <span id="cart-count-nav" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full">0</span>
+                        </div>
+                        <span class="text-xs">Panier</span>
+                    </button>
+                    <a href="https://wa.me/2250777181502" data-whatsapp-link="1" target="_blank" rel="noopener noreferrer" class="hidden md:flex flex-col items-center gap-0.5 hover:bg-white/10 p-2 rounded-md transition-colors" aria-label="Contacter sur WhatsApp">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        <span class="text-xs">Aide</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@sevy_store?_r=1&_d=ee1039h9klhhah&sec_uid=MS4wLjABAAAAlqfQCeqno-EaL2H-zdGMvBJCHO6cCPttrVmkNUkQj6Y93-wwH260XSfpfuE9ss1C&share_author_id=7547269570928100408&sharer_language=fr&source=h5_m&u_code=em91c5dfh40170&timestamp=1775700813&user_id=7547269570928100408&sec_user_id=MS4wLjABAAAAlqfQCeqno-EaL2H-zdGMvBJCHO6cCPttrVmkNUkQj6Y93-wwH260XSfpfuE9ss1C&item_author_type=1&utm_source=whatsapp&utm_campaign=client_share&utm_medium=android&share_iid=7626564589090785045&share_link_id=8259fefd-cf5a-4352-ac40-8960a7f64239&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b8727%2Cb7360&social_share_type=5&enable_checksum=1" target="_blank" rel="noopener noreferrer" class="hidden md:flex flex-col items-center gap-0.5 hover:bg-white/10 p-2 rounded-md transition-colors" aria-label="Ouvrir TikTok Sevy Store">
+                        <i class="fab fa-tiktok text-lg"></i>
+                        <span class="text-xs">TikTok</span>
+                    </a>
+                    <button type="button" onclick="openMobileMenu()" class="lg:hidden hover:bg-white/10 p-2 rounded-md" aria-label="Ouvrir le menu">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation par catégories -->
+        <div class="bg-[#e07b00] border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-4">
+                <nav class="flex items-center gap-1 overflow-x-auto text-sm py-2">
+                    <button type="button" data-category="all" onclick="filterByCategory('all')" class="category-btn active whitespace-nowrap px-4 py-1.5 rounded hover:bg-white/10 transition-colors flex items-center gap-2">
+                        <i class="fas fa-th-large"></i> Tous
+                    </button>
+                    <button type="button" data-category="homme" onclick="filterByCategory('homme')" class="category-btn whitespace-nowrap px-4 py-1.5 rounded hover:bg-white/10 transition-colors flex items-center gap-2">
+                        <i class="fas fa-male"></i> Homme
+                    </button>
+                    <button type="button" data-category="femme" onclick="filterByCategory('femme')" class="category-btn whitespace-nowrap px-4 py-1.5 rounded hover:bg-white/10 transition-colors flex items-center gap-2">
+                        <i class="fas fa-female"></i> Femme
+                    </button>
+                    <button type="button" data-category="mixte" onclick="filterByCategory('mixte')" class="category-btn whitespace-nowrap px-4 py-1.5 rounded hover:bg-white/10 transition-colors flex items-center gap-2">
+                        <i class="fas fa-venus-mars"></i> Mixte
+                    </button>
+                    <button onclick="navigateToSection('shop')" class="whitespace-nowrap px-4 py-1.5 rounded hover:bg-white/10 transition-colors flex items-center gap-2">
+                        <i class="fas fa-fire"></i> Promos
+                    </button>
+                    <button onclick="navigateToSection('shop')" class="whitespace-nowrap px-4 py-1.5 rounded hover:bg-white/10 transition-colors flex items-center gap-2">
+                        <i class="fas fa-star"></i> Nouveautés
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- MENU MOBILE -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full w-80 bg-white z-50 shadow-2xl">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-[#8b1e2f] rounded-lg flex items-center justify-center text-white text-xl font-bold">
+                        <i class="fas fa-shoe-prints"></i>
+                    </div>
+                    <h2 class="logo-font text-xl font-bold text-[#8b1e2f]">SEVY SNEAKERS</h2>
+                </div>
+                <button onclick="closeMobileMenu()" class="text-2xl text-gray-500 hover:text-[#8b1e2f]">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Recherche Mobile -->
+            <div class="relative mb-6">
+                <input 
+                    id="mobile-search-input"
+                    type="text" 
+                    placeholder="Rechercher des sneakers..." 
+                    onkeyup="if(event.key==='Enter') { filterProducts(); closeMobileMenu(); }"
+                    class="w-full bg-gray-100 border border-transparent focus:border-[#8b1e2f] rounded-md py-3 px-4 pl-10 text-sm focus:outline-none">
+                <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            </div>
+
+            <nav class="space-y-2">
+                <a onclick="navigateToSection('home'); closeMobileMenu();" class="flex items-center gap-3 py-3 px-3 rounded-lg hover:bg-[#8b1e2f]/10 cursor-pointer text-gray-700 hover:text-[#8b1e2f] transition-all">
+                    <i class="fas fa-home w-6 text-center"></i> Accueil
+                </a>
+                <a onclick="filterByCategory('homme'); closeMobileMenu();" class="flex items-center gap-3 py-3 px-3 rounded-lg hover:bg-[#8b1e2f]/10 cursor-pointer text-gray-700 hover:text-[#8b1e2f] transition-all">
+                    <i class="fas fa-male w-6 text-center"></i> Homme
+                </a>
+                <a onclick="filterByCategory('femme'); closeMobileMenu();" class="flex items-center gap-3 py-3 px-3 rounded-lg hover:bg-[#8b1e2f]/10 cursor-pointer text-gray-700 hover:text-[#8b1e2f] transition-all">
+                    <i class="fas fa-female w-6 text-center"></i> Femme
+                </a>
+                <a onclick="filterByCategory('mixte'); closeMobileMenu();" class="flex items-center gap-3 py-3 px-3 rounded-lg hover:bg-[#8b1e2f]/10 cursor-pointer text-gray-700 hover:text-[#8b1e2f] transition-all">
+                    <i class="fas fa-venus-mars w-6 text-center"></i> Mixte
+                </a>
+                <a onclick="showFavorites(); closeMobileMenu();" class="flex items-center gap-3 py-3 px-3 rounded-lg hover:bg-[#8b1e2f]/10 cursor-pointer text-gray-700 hover:text-[#8b1e2f] transition-all">
+                    <i class="fas fa-heart w-6 text-center"></i> Mes Favoris
+                </a>
+                <a onclick="showCart(); closeMobileMenu();" class="flex items-center gap-3 py-3 px-3 rounded-lg hover:bg-[#8b1e2f]/10 cursor-pointer text-gray-700 hover:text-[#8b1e2f] transition-all">
+                    <i class="fas fa-shopping-cart w-6 text-center"></i> Mon Panier
+                </a>
+                <a href="https://wa.me/2250777181502" data-whatsapp-link="1" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 py-3 px-3 rounded-lg bg-[#8b1e2f] text-white cursor-pointer hover:bg-[#e07b00] transition-all">
+                    <i class="fab fa-whatsapp w-6 text-center"></i> Contact WhatsApp
+                </a>
+                <a href="https://www.tiktok.com/@sevy_store?_r=1&_d=ee1039h9klhhah&sec_uid=MS4wLjABAAAAlqfQCeqno-EaL2H-zdGMvBJCHO6cCPttrVmkNUkQj6Y93-wwH260XSfpfuE9ss1C&share_author_id=7547269570928100408&sharer_language=fr&source=h5_m&u_code=em91c5dfh40170&timestamp=1775700813&user_id=7547269570928100408&sec_user_id=MS4wLjABAAAAlqfQCeqno-EaL2H-zdGMvBJCHO6cCPttrVmkNUkQj6Y93-wwH260XSfpfuE9ss1C&item_author_type=1&utm_source=whatsapp&utm_campaign=client_share&utm_medium=android&share_iid=7626564589090785045&share_link_id=8259fefd-cf5a-4352-ac40-8960a7f64239&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b8727%2Cb7360&social_share_type=5&enable_checksum=1" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 py-3 px-3 rounded-lg border border-gray-200 text-gray-800 cursor-pointer hover:bg-gray-50 transition-all" aria-label="Ouvrir TikTok Sevy Store">
+                    <i class="fab fa-tiktok w-6 text-center text-black"></i> Suivre sur TikTok
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- HERO BANNER STYLE JUMIA -->
+    <section class="bg-gray-100 py-4">
+        <div class="max-w-7xl mx-auto px-4">
+            <!-- Banner Principal -->
+            <div class="bg-gradient-to-r from-[#8b1e2f] to-[#e07b00] rounded-lg shadow-lg overflow-hidden mb-4">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <div class="text-white">
+                        <div class="flex items-center gap-2 mb-1">
+                            <i class="fas fa-bolt text-yellow-300"></i>
+                            <span class="text-sm font-semibold uppercase tracking-wider">Flash Deal</span>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-bold">Sneakers Premium</h2>
+                        <p class="text-white/90 text-sm mt-1">Jusqu'à -30% sur les Nike, Adidas & New Balance</p>
+                    </div>
+                    <div class="hidden md:block">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=80" alt="Sneakers" class="w-32 h-32 object-contain drop-shadow-lg">
+                    </div>
+                    <button onclick="navigateToSection('shop')" class="bg-white text-[#8b1e2f] px-6 py-3 rounded-md font-bold text-sm hover:bg-gray-100 transition-colors shadow-md">
+                        Découvrir <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bannières secondaires -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer" onclick="filterByCategory('homme')">
+                    <div class="flex items-center p-4">
+                        <div class="flex-1">
+                            <span class="text-[#8b1e2f] text-xs font-bold uppercase">Collection</span>
+                            <h3 class="font-bold text-gray-900">Homme</h3>
+                            <p class="text-sm text-gray-500">Nike, Adidas, Jordan</p>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100&q=80" class="w-16 h-16 object-contain">
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer" onclick="filterByCategory('femme')">
+                    <div class="flex items-center p-4">
+                        <div class="flex-1">
+                            <span class="text-[#8b1e2f] text-xs font-bold uppercase">Collection</span>
+                            <h3 class="font-bold text-gray-900">Femme</h3>
+                            <p class="text-sm text-gray-500">New Balance, Puma</p>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1560769629-9752f3f5e4be?w=100&q=80" class="w-16 h-16 object-contain">
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer" onclick="filterByCategory('mixte')">
+                    <div class="flex items-center p-4">
+                        <div class="flex-1">
+                            <span class="text-[#8b1e2f] text-xs font-bold uppercase">Collection</span>
+                            <h3 class="font-bold text-gray-900">Mixte</h3>
+                            <p class="text-sm text-gray-500">Vans, Converse</p>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=100&q=80" class="w-16 h-16 object-contain">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES BAR -->
+    <section class="bg-white py-8 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="feature-card flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 transition-all cursor-pointer">
+                    <div class="feature-icon w-12 h-12 bg-[#8b1e2f]/10 rounded-full flex items-center justify-center text-[#8b1e2f]">
+                        <i class="fas fa-shipping-fast text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-900">Livraison Express</div>
+                        <div class="text-sm text-gray-500">48h maximum</div>
+                    </div>
+                </div>
+                <div class="feature-card flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 transition-all cursor-pointer">
+                    <div class="feature-icon w-12 h-12 bg-[#8b1e2f]/10 rounded-full flex items-center justify-center text-[#8b1e2f]">
+                        <i class="fas fa-undo text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-900">Retour Gratuit</div>
+                        <div class="text-sm text-gray-500">Sous 7 jours</div>
+                    </div>
+                </div>
+                <div class="feature-card flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 transition-all cursor-pointer">
+                    <div class="feature-icon w-12 h-12 bg-[#8b1e2f]/10 rounded-full flex items-center justify-center text-[#8b1e2f]">
+                        <i class="fas fa-headset text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-900">Support 24/7</div>
+                        <div class="text-sm text-gray-500">Via WhatsApp</div>
+                    </div>
+                </div>
+                <div class="feature-card flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 transition-all cursor-pointer">
+                    <div class="feature-icon w-12 h-12 bg-[#8b1e2f]/10 rounded-full flex items-center justify-center text-[#8b1e2f]">
+                        <i class="fas fa-medal text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-900">Qualité Premium</div>
+                        <div class="text-sm text-gray-500">Garantie satisfait</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOUTIQUE SECTION STYLE JUMIA -->
+    <section id="shop" class="max-w-7xl mx-auto px-4 py-6">
+        <!-- Header avec promotions -->
+        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6">
+            <div class="flex items-center gap-3">
+                <div class="bg-[#8b1e2f] text-white px-3 py-1 rounded text-sm font-bold">
+                    <i class="fas fa-fire mr-1"></i> PROMO
+                </div>
+                <h2 class="text-xl md:text-2xl font-bold text-gray-900">Sneakers Tendance</h2>
+            </div>
+            <div class="flex items-center gap-3">
+                <span id="results-count" class="text-sm text-gray-500">9 produits</span>
+                <select id="sort-select" onchange="sortProducts()" class="bg-white border border-gray-200 rounded-md py-2 px-3 text-sm focus:outline-none focus:border-[#8b1e2f]">
+                    <option value="default">Trier par</option>
+                    <option value="price-low">Prix croissant</option>
+                    <option value="price-high">Prix décroissant</option>
+                    <option value="name">Nom A-Z</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Grille de produits style Jumia -->
+        <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            <!-- Les cartes seront générées en JavaScript -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="text-center mt-8">
+            <button id="load-more-btn" onclick="loadMoreProducts()" class="px-8 py-3 bg-white border-2 border-[#8b1e2f] text-[#8b1e2f] rounded-md font-semibold hover:bg-[#8b1e2f] hover:text-white transition-all">
+                <i class="fas fa-spinner mr-2"></i>Voir plus de produits
+            </button>
+        </div>
+    </section>
+
+    <!-- À PROPOS SECTION -->
+    <section id="about" class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-[#8b1e2f]/10 rounded-full"></div>
+                    <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-[#8b1e2f]/10 rounded-full"></div>
+                    <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&q=80" 
+                         alt="Sevy Store Boutique" 
+                         class="relative rounded-3xl shadow-2xl w-full object-cover h-[500px]">
+                    <div class="absolute -bottom-6 left-6 bg-white p-4 rounded-2xl shadow-xl">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-[#8b1e2f] rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-award text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-gray-900">5+ Années</div>
+                                <div class="text-sm text-gray-500">D'expérience</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-[#8b1e2f]/10 text-[#8b1e2f] text-xs font-semibold px-4 py-2 rounded-full mb-4">
+                        <i class="fas fa-star"></i> À PROPOS DE NOUS
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 logo-font">Votre Boutique de Mode Premium en Côte d'Ivoire</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Sevy Store est née de la passion pour la mode et le désir d'offrir aux Ivoiriens des vêtements de qualité exceptionnelle. Depuis 2021, nous sélectionnons avec soin chaque pièce de notre collection pour vous garantir style, confort et durabilité.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Basée à Abidjan, notre boutique s'engage à offrir une expérience d'achat unique avec une livraison rapide dans tout le pays et un service client disponible 24/7 via WhatsApp.
+                    </p>
+                    <div class="grid grid-cols-3 gap-6 mb-8">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-[#8b1e2f]">15K+</div>
+                            <div class="text-sm text-gray-500">Clients satisfaits</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-[#8b1e2f]">500+</div>
+                            <div class="text-sm text-gray-500">Produits</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-[#8b1e2f]">48h</div>
+                            <div class="text-sm text-gray-500">Livraison</div>
+                        </div>
+                    </div>
+                    <button onclick="navigateToSection('shop')" class="btn-primary text-white px-8 py-3 rounded-full font-semibold">
+                        Explorer la collection <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TÉMOIGNAGES SECTION -->
+    <section class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center gap-2 bg-[#8b1e2f]/10 text-[#8b1e2f] text-xs font-semibold px-4 py-2 rounded-full mb-4">
+                    <i class="fas fa-comments"></i> AVIS CLIENTS
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 logo-font">Ce que disent nos clients</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">Découvrez les témoignages de nos clients satisfaits à travers la Côte d'Ivoire</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="testimonial-card p-6 rounded-3xl shadow-sm hover:shadow-lg transition-all">
+                    <div class="flex items-center gap-1 text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Qualité exceptionnelle ! J'ai commandé une chemise Oxford et elle dépasse toutes mes attentes. La livraison à Cocody a été rapide."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-[#8b1e2f] rounded-full flex items-center justify-center text-white font-semibold">AK</div>
+                        <div>
+                            <div class="font-semibold text-gray-900">Amadou K.</div>
+                            <div class="text-sm text-gray-500">Abidjan, Cocody</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card p-6 rounded-3xl shadow-sm hover:shadow-lg transition-all">
+                    <div class="flex items-center gap-1 text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Service client au top ! Leur équipe WhatsApp m'a aidée à choisir la bonne taille. La robe que j'ai reçue est magnifique."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-[#8b1e2f] rounded-full flex items-center justify-center text-white font-semibold">SY</div>
+                        <div>
+                            <div class="font-semibold text-gray-900">Sarah Y.</div>
+                            <div class="text-sm text-gray-500">Bouaké</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card p-6 rounded-3xl shadow-sm hover:shadow-lg transition-all">
+                    <div class="flex items-center gap-1 text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Je recommande vivement ! Paiement à la livraison très pratique. Le pantalon cargo est de très bonne qualité."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-[#8b1e2f] rounded-full flex items-center justify-center text-white font-semibold">KM</div>
+                        <div>
+                            <div class="font-semibold text-gray-900">Kouamé M.</div>
+                            <div class="text-sm text-gray-500">Yamoussoukro</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER SECTION -->
+    <section class="newsletter-gradient py-16">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-2 bg-white/20 text-white text-xs font-semibold px-4 py-2 rounded-full mb-4">
+                <i class="fas fa-envelope"></i> NEWSLETTER
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 logo-font">Rejoignez notre communauté</h2>
+            <p class="text-white/80 mb-8 max-w-xl mx-auto">Inscrivez-vous pour recevoir nos nouveautés, offres exclusives et conseils mode directement sur WhatsApp ou par email.</p>
+            
+            <form onsubmit="handleNewsletterSubmit(event)" class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                <input 
+                    type="text" 
+                    id="newsletter-phone"
+                    placeholder="Votre numéro WhatsApp" 
+                    class="flex-1 bg-white/10 border border-white/30 rounded-full py-3 px-6 text-white placeholder-white/60 focus:outline-none focus:border-white"
+                    required>
+                <button type="submit" class="bg-white text-[#8b1e2f] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-all flex items-center justify-center gap-2">
+                    <i class="fas fa-paper-plane"></i> S'inscrire
+                </button>
+            </form>
+            <p class="text-white/60 text-sm mt-4">En vous inscrivant, vous acceptez de recevoir nos communications marketing.</p>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-[#8b1e2f]/10 text-[#8b1e2f] text-xs font-semibold px-4 py-2 rounded-full mb-4">
+                        <i class="fas fa-headset"></i> CONTACT
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 logo-font">Besoin d'aide ?</h2>
+                    <p class="text-gray-600 mb-8">Notre équipe est disponible 24/7 pour répondre à toutes vos questions. Contactez-nous via WhatsApp pour une réponse rapide.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-[#8b1e2f]/10 rounded-full flex items-center justify-center text-[#8b1e2f] flex-shrink-0">
+                                <i class="fab fa-whatsapp text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900">WhatsApp</div>
+                                <div class="text-gray-600">+225 07 77 18 15 02</div>
+                                <div class="text-sm text-gray-500">Réponse en moins de 5 min</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-[#8b1e2f]/10 rounded-full flex items-center justify-center text-[#8b1e2f] flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900">Adresse</div>
+                                <div class="text-gray-600">Abidjan, Côte d'Ivoire</div>
+                                <div class="text-sm text-gray-500">Livraison dans tout le pays</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-[#8b1e2f]/10 rounded-full flex items-center justify-center text-[#8b1e2f] flex-shrink-0">
+                                <i class="fas fa-clock text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900">Horaires</div>
+                                <div class="text-gray-600">Lun - Sam : 8h00 - 20h00</div>
+                                <div class="text-sm text-gray-500">Dimanche : Sur commande</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-3xl">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">Envoyez-nous un message</h3>
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="text" id="contact-name" placeholder="Votre nom" required
+                                   class="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 focus:outline-none focus:border-[#8b1e2f]">
+                            <input type="tel" id="contact-phone" placeholder="Téléphone" required
+                                   class="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 focus:outline-none focus:border-[#8b1e2f]">
+                        </div>
+                        <input type="email" id="contact-email" placeholder="Votre email (optionnel)"
+                               class="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 focus:outline-none focus:border-[#8b1e2f]">
+                        <textarea id="contact-message" placeholder="Votre message..." rows="4" required
+                                  class="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 focus:outline-none focus:border-[#8b1e2f] resize-none"></textarea>
+                        <button type="submit" class="w-full btn-primary text-white py-4 rounded-xl font-semibold">
+                            <i class="fas fa-paper-plane mr-2"></i> Envoyer le message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER STYLE JUMIA -->
+    <footer class="bg-[#333] text-white">
+        <!-- Bandeau orange -->
+        <div class="bg-[#8b1e2f] py-3">
+            <div class="max-w-7xl mx-auto px-4 text-center">
+                <p class="text-sm font-semibold"><i class="fas fa-truck mr-2"></i>Livraison rapide à Abidjan | <i class="fas fa-phone mr-2"></i>Contact WhatsApp : 07 77 18 15 02</p>
+            </div>
+        </div>
+
+        <!-- Contenu principal -->
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Colonne 1 -->
+                <div>
+                    <h4 class="text-[#8b1e2f] font-bold mb-3 text-sm uppercase">Besoin d'aide ?</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="https://wa.me/2250777181502" data-whatsapp-link="1" target="_blank" rel="noopener noreferrer" class="hover:text-white flex items-center gap-2" aria-label="Contacter Sevy Store sur WhatsApp"><i class="fab fa-whatsapp text-green-400"></i> WhatsApp</a></li>
+                        <li><a href="https://www.tiktok.com/@sevy_store?_r=1&_d=ee1039h9klhhah&sec_uid=MS4wLjABAAAAlqfQCeqno-EaL2H-zdGMvBJCHO6cCPttrVmkNUkQj6Y93-wwH260XSfpfuE9ss1C&share_author_id=7547269570928100408&sharer_language=fr&source=h5_m&u_code=em91c5dfh40170&timestamp=1775700813&user_id=7547269570928100408&sec_user_id=MS4wLjABAAAAlqfQCeqno-EaL2H-zdGMvBJCHO6cCPttrVmkNUkQj6Y93-wwH260XSfpfuE9ss1C&item_author_type=1&utm_source=whatsapp&utm_campaign=client_share&utm_medium=android&share_iid=7626564589090785045&share_link_id=8259fefd-cf5a-4352-ac40-8960a7f64239&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b8727%2Cb7360&social_share_type=5&enable_checksum=1" target="_blank" rel="noopener noreferrer" class="hover:text-white flex items-center gap-2" aria-label="Suivre Sevy Store sur TikTok"><i class="fab fa-tiktok"></i> TikTok</a></li>
+                        <li><span class="flex items-center gap-2"><i class="fas fa-phone"></i> 07 77 18 15 02</span></li>
+                        <li><span class="flex items-center gap-2"><i class="fas fa-map-marker-alt"></i> Abidjan, Côte d'Ivoire</span></li>
+                    </ul>
+                </div>
+
+                <!-- Colonne 2 -->
+                <div>
+                    <h4 class="text-[#8b1e2f] font-bold mb-3 text-sm uppercase">Catégories</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a onclick="filterByCategory('homme')" class="hover:text-white cursor-pointer">Homme</a></li>
+                        <li><a onclick="filterByCategory('femme')" class="hover:text-white cursor-pointer">Femme</a></li>
+                        <li><a onclick="filterByCategory('mixte')" class="hover:text-white cursor-pointer">Mixte</a></li>
+                        <li><a onclick="navigateToSection('shop')" class="hover:text-white cursor-pointer">Promotions</a></li>
+                    </ul>
+                </div>
+
+                <!-- Colonne 3 -->
+                <div>
+                    <h4 class="text-[#8b1e2f] font-bold mb-3 text-sm uppercase">Marques</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><span>Nike</span></li>
+                        <li><span>Adidas</span></li>
+                        <li><span>New Balance</span></li>
+                        <li><span>Vans</span></li>
+                    </ul>
+                </div>
+
+                <!-- Colonne 4 -->
+                <div>
+                    <h4 class="text-[#8b1e2f] font-bold mb-3 text-sm uppercase">Newsletter</h4>
+                    <form onsubmit="handleFooterNewsletter(event)" class="space-y-2">
+                        <input type="tel" placeholder="Votre numéro WhatsApp" required
+                               class="w-full bg-white/10 border border-white/20 rounded px-3 py-2 text-sm text-white placeholder-gray-400 focus:outline-none focus:border-[#8b1e2f]">
+                        <button type="submit" class="w-full bg-[#8b1e2f] hover:bg-[#e07b00] text-white py-2 rounded text-sm font-semibold transition-colors">
+                            S'inscrire
+                        </button>
+                    </form>
+                    <div class="flex gap-3 mt-4">
+                        <a href="#" class="w-8 h-8 bg-white/10 rounded flex items-center justify-center hover:bg-[#8b1e2f] transition-colors" aria-label="Facebook (non configuré)"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 bg-white/10 rounded flex items-center justify-center hover:bg-[#8b1e2f] transition-colors" aria-label="Instagram (non configuré)"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@sevy_store?_r=1&_d=ee1039h9klhhah&sec_uid=MS4wLjABAAAAlqfQCeqno-EaL2H-zdGMvBJCHO6cCPttrVmkNUkQj6Y93-wwH260XSfpfuE9ss1C&share_author_id=7547269570928100408&sharer_language=fr&source=h5_m&u_code=em91c5dfh40170&timestamp=1775700813&user_id=7547269570928100408&sec_user_id=MS4wLjABAAAAlqfQCeqno-EaL2H-zdGMvBJCHO6cCPttrVmkNUkQj6Y93-wwH260XSfpfuE9ss1C&item_author_type=1&utm_source=whatsapp&utm_campaign=client_share&utm_medium=android&share_iid=7626564589090785045&share_link_id=8259fefd-cf5a-4352-ac40-8960a7f64239&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b8727%2Cb7360&social_share_type=5&enable_checksum=1" target="_blank" rel="noopener noreferrer" class="w-8 h-8 bg-white/10 rounded flex items-center justify-center hover:bg-[#8b1e2f] transition-colors" aria-label="TikTok Sevy Store"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-white/10 mt-8 pt-6 text-center">
+                <p class="text-sm text-gray-400">© 2026 SEVY SNEAKERS - Tous droits réservés | <a href="admin.html" class="text-[#8b1e2f] hover:underline">Administration</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL FAVORIS -->
+    <div id="favorites-modal" onclick="if(event.target===this)hideFavorites()" 
+         class="hidden fixed inset-0 bg-black/70 z-[9999] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" 
+             class="modal bg-white rounded-3xl w-full max-w-2xl max-h-[85vh] overflow-hidden flex flex-col">
+            <div class="px-8 py-6 border-b flex items-center justify-between bg-gray-50">
+                <h3 class="text-2xl font-semibold flex items-center gap-3">
+                    <i class="fas fa-heart text-[#8b1e2f]"></i>
+                    Mes Favoris
+                </h3>
+                <button onclick="hideFavorites()" class="text-3xl text-gray-400 hover:text-gray-600 w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-200 transition-all">×</button>
+            </div>
+            
+            <div id="favorites-content" class="flex-1 p-6 overflow-auto">
+                <div class="flex flex-col items-center justify-center h-full text-center py-12 text-gray-400" id="empty-favorites">
+                    <i class="fas fa-heart text-7xl mb-6 opacity-30"></i>
+                    <p class="text-xl">Aucun article dans vos favoris</p>
+                    <p class="mt-2 text-sm">Cliquez sur ❤️ sur un produit pour l'ajouter ici</p>
+                    <button onclick="hideFavorites(); navigateToSection('shop');" class="mt-6 bg-[#8b1e2f] text-white px-6 py-3 rounded-full text-sm font-medium">
+                        Découvrir les produits
+                    </button>
+                </div>
+            </div>
+            
+            <div class="px-8 py-6 border-t bg-gray-50 text-right">
+                <button onclick="hideFavorites()" 
+                        class="px-8 py-3 text-sm font-medium border border-gray-300 rounded-full hover:bg-gray-100 transition-all">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PANIER -->
+    <div id="cart-modal" onclick="if(event.target===this)hideCart()" 
+         class="hidden fixed inset-0 bg-black/70 z-[9999] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" 
+             class="modal bg-white rounded-3xl w-full max-w-2xl max-h-[85vh] overflow-hidden flex flex-col">
+            <div class="px-8 py-6 border-b flex items-center justify-between bg-gray-50">
+                <h3 class="text-2xl font-semibold flex items-center gap-3">
+                    <i class="fas fa-shopping-bag text-[#8b1e2f]"></i>
+                    Mon Panier
+                </h3>
+                <button onclick="hideCart()" class="text-3xl text-gray-400 hover:text-gray-600 w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-200 transition-all">×</button>
+            </div>
+            
+            <div id="cart-content" class="flex-1 p-6 overflow-auto">
+                <!-- Rempli par JS -->
+            </div>
+            
+            <div id="cart-footer" class="px-8 py-6 border-t bg-gray-50">
+                <div class="flex justify-between items-baseline mb-4">
+                    <span class="text-lg text-gray-600">Sous-total</span>
+                    <span id="cart-subtotal" class="text-xl font-semibold text-gray-900">0 FCFA</span>
+                </div>
+                <div class="flex justify-between items-baseline mb-6">
+                    <span class="text-lg text-gray-600">Livraison</span>
+                    <span class="text-xl font-semibold text-green-600">Gratuite</span>
+                </div>
+                <div class="flex justify-between items-baseline mb-6 pt-4 border-t">
+                    <span class="text-xl font-semibold text-gray-900">Total</span>
+                    <span id="cart-total" class="text-4xl font-bold text-[#8b1e2f]">0 FCFA</span>
+                </div>
+                
+                <button onclick="proceedToWhatsApp()" 
+                        class="w-full btn-primary text-white py-5 rounded-3xl text-lg font-semibold flex items-center justify-center gap-3 shadow-lg">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                    FINALISER SUR WHATSAPP
+                </button>
+                
+                <button onclick="hideCart(); navigateToSection('shop');" 
+                        class="w-full mt-3 py-3 text-sm font-medium text-gray-600 hover:text-gray-900 transition-all">
+                    Continuer mes achats
+                </button>
+                
+                <p class="text-center text-xs text-gray-400 mt-4">
+                    Vous serez redirigé vers WhatsApp <strong>07 77 18 15 02</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DÉTAIL PRODUIT -->
+    <div id="product-modal" onclick="if(event.target===this)closeProductModal()" 
+         class="hidden fixed inset-0 bg-black/70 z-[9999] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" 
+             class="modal bg-white rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col md:flex-row">
+            <div class="md:w-1/2 relative bg-gray-100">
+                <img id="modal-product-image" src="" alt="" class="w-full h-full object-cover min-h-[300px] md:min-h-[500px]">
+                <button onclick="closeProductModal()" class="absolute top-4 right-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center text-gray-600 hover:bg-white md:hidden">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="md:w-1/2 p-6 md:p-8 overflow-auto">
+                <div class="hidden md:flex justify-between items-start mb-4">
+                    <span id="modal-product-category" class="inline-block bg-[#8b1e2f]/10 text-[#8b1e2f] text-xs font-semibold px-3 py-1 rounded-full"></span>
+                    <button onclick="closeProductModal()" class="text-2xl text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <h2 id="modal-product-name" class="text-2xl md:text-3xl font-bold text-gray-900 mb-2"></h2>
+                <div class="flex items-center gap-4 mb-4">
+                    <span id="modal-product-price" class="text-3xl font-bold text-[#8b1e2f]"></span>
+                    <div class="flex items-center gap-1 text-yellow-400 text-sm">
+                        <i class="fas fa-star"></i>
+                        <span class="text-gray-600">4.8 (127 avis)</span>
+                    </div>
+                </div>
+                
+                <p id="modal-product-description" class="text-gray-600 mb-6 leading-relaxed"></p>
+                
+                <!-- Tailles -->
+                <div class="mb-6" id="modal-size-block">
+                    <label class="block text-sm font-semibold text-gray-900 mb-3">Pointure</label>
+                    <div id="modal-sizes" class="flex flex-wrap gap-2"></div>
+                </div>
+                
+                <!-- Couleurs -->
+                <div class="mb-6" id="modal-color-block">
+                    <label class="block text-sm font-semibold text-gray-900 mb-3">Couleur</label>
+                    <div id="modal-colors" class="flex flex-wrap gap-2"></div>
+                </div>
+                
+                <!-- Quantité -->
+                <div class="mb-6">
+                    <label class="block text-sm font-semibold text-gray-900 mb-3">Quantité</label>
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center border-2 border-gray-200 rounded-xl">
+                            <button onclick="changeModalQuantity(-1)" class="px-4 py-3 text-lg font-medium hover:bg-gray-50">-</button>
+                            <span id="modal-quantity" class="px-6 font-semibold text-lg">1</span>
+                            <button onclick="changeModalQuantity(1)" class="px-4 py-3 text-lg font-medium hover:bg-gray-50">+</button>
+                        </div>
+                        <span class="text-sm text-gray-500">Stock disponible</span>
+                    </div>
+                </div>
+                
+                <!-- Actions -->
+                <div class="flex gap-3">
+                    <button id="modal-add-to-cart" onclick="addToCartFromModal()" 
+                            class="flex-1 btn-primary text-white py-4 rounded-2xl font-semibold flex items-center justify-center gap-2">
+                        <i class="fas fa-shopping-bag"></i>
+                        Ajouter au panier
+                    </button>
+                    <button id="modal-favorite-btn" onclick="toggleFavoriteFromModal()" 
+                            class="w-14 h-14 border-2 border-gray-200 rounded-2xl flex items-center justify-center text-xl hover:border-[#8b1e2f] hover:text-[#8b1e2f] transition-all">
+                        ♡
+                    </button>
+                </div>
+                
+                <!-- Info livraison -->
+                <div class="mt-6 p-4 bg-gray-50 rounded-xl">
+                    <div class="flex items-center gap-3 text-sm text-gray-600">
+                        <i class="fas fa-truck text-[#8b1e2f]"></i>
+                        <span>Livraison gratuite sous 48h à Abidjan</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-4 left-4 z-[99999] space-y-2"></div>
+
+    <!-- Quick actions (WhatsApp, TikTok, Admin) -->
+    <div class="fixed bottom-4 right-4 z-40 flex flex-col gap-2 items-end">
+        <a href="https://wa.me/2250777181502" data-whatsapp-link="1" target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-green-500 text-white rounded-full shadow-lg hover:brightness-95 transition-all flex items-center justify-center text-lg" title="WhatsApp" aria-label="Contacter sur WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.tiktok.com/@sevy_store?_r=1&_d=ee1039h9klhhah&sec_uid=MS4wLjABAAAAlqfQCeqno-EaL2H-zdGMvBJCHO6cCPttrVmkNUkQj6Y93-wwH260XSfpfuE9ss1C&share_author_id=7547269570928100408&sharer_language=fr&source=h5_m&u_code=em91c5dfh40170&timestamp=1775700813&user_id=7547269570928100408&sec_user_id=MS4wLjABAAAAlqfQCeqno-EaL2H-zdGMvBJCHO6cCPttrVmkNUkQj6Y93-wwH260XSfpfuE9ss1C&item_author_type=1&utm_source=whatsapp&utm_campaign=client_share&utm_medium=android&share_iid=7626564589090785045&share_link_id=8259fefd-cf5a-4352-ac40-8960a7f64239&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b8727%2Cb7360&social_share_type=5&enable_checksum=1" target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-black text-white rounded-full shadow-lg hover:bg-gray-900 transition-all flex items-center justify-center text-lg" title="TikTok" aria-label="Ouvrir TikTok Sevy Store">
+            <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="admin.html" class="w-11 h-11 bg-gray-800/80 text-white rounded-full shadow-lg hover:bg-[#8b1e2f] transition-all flex items-center justify-center text-sm" title="Administration" aria-label="Administration">
+            <i class="fas fa-cog"></i>
+        </a>
+        <button id="back-to-top" type="button" onclick="backToTop()" class="hidden w-11 h-11 bg-white text-[#8b1e2f] rounded-full shadow-lg hover:bg-gray-50 transition-all flex items-center justify-center text-lg border border-gray-200" title="Retour en haut" aria-label="Retour en haut">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
